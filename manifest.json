@@ -1,30 +1,30 @@
 {
-  "name": "Auto YouTube Player",
+  "name": "YouTube Modifier",
   "version": "1.0",
-  "description": "Play the next YouTube video automatically",
+  "description": "Modify YouTube",
+  "manifest_version": 2,
   "icons": {
-    "16": "images/get_started16.png",
-    "32": "images/get_started32.png",
-    "48": "images/get_started48.png",
-    "128": "images/get_started128.png"
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
   },
   "web_accessible_resources": ["images/*.png"],
-  "permissions": ["tabs", "*://*/*", "storage"],
+  "permissions": ["tabs", "storage"],
+  "browser_action": {
+    "default_icon": "images/icon-16.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "YouTube Modifier"
+  },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "css": ["style.css"],
-      "js": ["content.js"]
+      "css": ["content.css"],
+      "js": ["content.js"],
+      "matches": ["https://*.youtube.com/*"]
     }
   ],
   "background": {
-    "scripts": ["./background.js"]
+    "scripts": ["background.js"]
   },
-  "browser_action": {
-    "default_icon": "images/get_started16.png",
-    "default_popup": "popup.html",
-    "default_title": "A popup"
-  },
-  "options_page": "./options.html",
-  "manifest_version": 2
+  "options_page": "options/options.html"
 }

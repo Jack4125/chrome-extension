@@ -1,16 +1,40 @@
-console.log('Entered extension content');
+let player = document.querySelector('.html5-main-video');
+let timer;
 
-setTimeout(function () {
-  document.querySelector('.ytp-next-button').click();
-}, 10000);
+chrome.runtime.onMessage.addListener((request) => {
+  console.log('request received', request);
+  if (request.action === 'hide') {
+    console.log('hide');
+    player.style.visibility = 'hidden';
+  }
 
-// let imgs = document.getElementsByTagName('img');
+  if (request.action === 'show') {
+    console.log('show');
+    player.style.visibility = 'visible';
+  }
 
-// for (img of imgs) {
-//   let file = 'images/get_started16.png';
-//   let url = chrome.extension.getURL(file);
-//   img.src = url;
-// }
+  if (request.action === 'start') {
+    console.log('start');
+    timer = setInterval(() => {
+      document.querySelector('.ytp-next-button').click();
+    }, 10000);
+  }
 
-// chrome.tabs does not exist on frontend content, as it is part of browser
-// not page
+  if (request.action === 'stop') {
+    console.log('stop');
+    clearInterval(timer);
+  }
+});
+
+// hide all
+chrome.storage.local.get('action', (response) => {
+  console.log('entered storage', response);
+
+  if (response.action === 'hide') {
+    player.style.visibility = 'hidden';
+  }
+
+  if (response.action === 'show') {
+    player.style.visibility = 'visible';
+  }
+});

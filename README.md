@@ -1,5 +1,13 @@
-# YouTube watcher
+# YouTube Modifier
 
-Automatically press (Shift + n) after 10 minutes of a video to move to the next
+Adds some additional functionalities to YouTube.
 
-<!-- https://www.youtube.com/watch?v=-dhMbVEreII -->
+## Options
+
+### Hide Display
+
+Hide YouTube video display screen.
+
+### Autoplay
+
+After playing a video for a set amount of time, automatically move on to the next video on the playlist.
