@@ -32,6 +32,10 @@ header img {
   margin: 0 10px;
 }
 
+.alert {
+  color: rgb(202, 0, 0);
+}
+
 h1 {
   font-size: 18px;
 }
