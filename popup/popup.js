@@ -1,4 +1,3 @@
-const autoplay = document.querySelector('.autoplay-state');
 const alertDisplay = document.querySelector('.alert');
 
 // hide screen
@@ -15,7 +14,7 @@ function screenControl(control) {
       chrome.tabs.sendMessage(tabs[0].id, { action: control });
       chrome.storage.local.set({ action: control });
     } else {
-      alertDisplay.innerHTML = 'Sorry you can only do this on a video page';
+      alertDisplay.innerHTML = 'You can only do this on a video page';
     }
   });
 }
@@ -29,7 +28,6 @@ document
   .addEventListener('click', () => autoplayControl('stop'));
 
 function autoplayControl(control) {
-  autoplay.innerHTML = 'Autoplay is running...';
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, { action: control });
   });

@@ -1,14 +1,14 @@
-let player = document.querySelector('.html5-main-video');
 let timer;
 
 chrome.runtime.onMessage.addListener((request) => {
   console.log('request received', request);
   if (request.action === 'hide') {
-    player.style.visibility = 'hidden';
+    // MUST querySelect element in here
+    document.querySelector('.html5-main-video').style.visibility = 'hidden';
   }
 
   if (request.action === 'show') {
-    player.style.visibility = 'visible';
+    document.querySelector('.html5-main-video').style.visibility = 'visible';
   }
 
   if (request.action === 'start') {
