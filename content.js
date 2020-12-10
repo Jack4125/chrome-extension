@@ -1,9 +1,17 @@
 let timer;
 
+// manifest.json - content has to match YouTube url
+console.log("entered content");
+
+chrome.storage.local.get(['key'], result => {
+  console.log('Value currently is ' + result.key);
+});
+
 chrome.runtime.onMessage.addListener((request) => {
   console.log('request received', request);
+  
+  // MUST querySelect element inside onMessage event
   if (request.action === 'hide') {
-    // MUST querySelect element in here
     document.querySelector('.html5-main-video').style.visibility = 'hidden';
   }
 
@@ -19,6 +27,19 @@ chrome.runtime.onMessage.addListener((request) => {
 
   if (request.action === 'stop') {
     clearInterval(timer);
+  }
+
+  if (request.action === 'filter') {
+    console.log('filter message rececived');
+    let cards = document.querySelectorAll('ytd-grid-video-renderer');
+    let authors = document.querySelectorAll('#text .yt-simple-endpoint');
+
+    authors.forEach((name, index) => {
+      if(name.innerHTML !== "RT America") {
+        // console.log('found at index', index)
+        cards[index].style.display = 'none';
+      }
+    })
   }
 });
 

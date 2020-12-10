@@ -33,8 +33,34 @@ function autoplayControl(control) {
   });
 }
 
-// hide all
-// doesn't work on new tabs, because they have new ids, aren't included
+// filter
+chrome.storage.local.get(['key'], result => {
+  // console.log('Value currently is ' + result.key);
+  document.getElementById('filter-list').innerHTML = result.key;
+});
+
+document
+.getElementById('delete')
+.addEventListener('click', () => {
+  chrome.storage.local.remove('key');
+});
+
+document
+.getElementById('filter')
+.addEventListener('click', () => filterControl('filter'));
+
+function filterControl(control) {
+  
+  // chrome.storage.local.set({key: "Adam"}, () => {
+  //   console.log('Value is set to ' + value);
+  // });
+
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, { action: control });
+  });
+}
+
+
 // document.getElementById('hide-all').addEventListener('click', () => {
 //   console.log('clicked');
 //   chrome.tabs.query({ url: 'https://*.youtube.com/*' }, (tabs) => {
